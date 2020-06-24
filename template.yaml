@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  yapp-backend-dev
+
+  Sample SAM Template for yapp-backend-dev
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 10
+    Environment:
+      Variables:
+        DATABASE_URL: mysql+mysqlconnector://docker:pass@10.0.0.21:3306/yapp
+
+Resources:
+  YappBackendListFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: yapp_backend/
+      Handler: app.movie_list_handler
+      Runtime: python3.8
+      Events:
+        YappBackend:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /movie/list
+            Method: get
+  YappBackendGetFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: yapp_backend/
+      Handler: app.movie_get_handler
+      Runtime: python3.8
+      Events:
+        YappBackend:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /movie/{id}
+            Method: get
+  YappBackendCreateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: yapp_backend/
+      Handler: app.movie_create_handler
+      Runtime: python3.8
+      Events:
+        YappBackend:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /movie
+            Method: post
+  YappBackendUpdateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: yapp_backend/
+      Handler: app.movie_update_handler
+      Runtime: python3.8
+      Events:
+        YappBackend:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /movie
+            Method: put
+  YappBackendDeleteFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: yapp_backend/
+      Handler: app.movie_delete_handler
+      Runtime: python3.8
+      Events:
+        YappBackend:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /movie
+            Method: delete
