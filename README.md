@@ -50,7 +50,7 @@ $ nano .env  # Edit file
 | PYTHONPATH   | Changes python root path for SAM compatibility, must be changed to point at "yapp_backend" folder                                 |
 | DATABASE_URL | MySQL URL for connection, must follow the following structure: "mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db_name}" |
 
-**Important:**, set the same DATABASE_URL environment variable for SAM Global configs located on `template.yaml` file.
+**Important:** Set the same DATABASE_URL environment variable for SAM Global configs located on `template.yaml` file.
 
 - ### Setup virtual environment and install requirements:
 
@@ -66,6 +66,7 @@ $ poetry install  # Create virtual env and install dependencies
 - ### Deploy MySQL DataBase
 
 If you already have MySQL deployed you can skip this step, just make sure to point the DATABASE_URL env var correctly.
+
 For easy deployment, a MySQL DataBase was containerized with a `docker-compose.yml` which also sets the needed environment variables for authentication.
 
 ```bash
@@ -75,6 +76,7 @@ $ docker-compose up --build -d  # Deploys MySQL database as a docker container
 - ### Seed Data
 
 Run the script `seed.py` which will create the Movie table from it's model and populate the DataBase with `data.csv` content.
+data.csv follows [this Kaggle repository](https://www.kaggle.com/ruchi798/movies-on-netflix-prime-video-hulu-and-disney/data#) structure.
 
 ```bash
 $ poetry shell  # activate virtual environment
@@ -97,6 +99,7 @@ sam build --use-container && sam local start-api
 ```
 
 You can test the API visiting a GET method on your browser, by default SAM runs at [http://localhost:3000/](http://localhost:3000/).
+
 [Postman](https://www.postman.com/) is recommended for fully featured testing.
 
 ## SAM API:
