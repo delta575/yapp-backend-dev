@@ -8,7 +8,6 @@ from sqlalchemy.orm import sessionmaker
 # Get DATABASE_URL from .env file
 load_dotenv()
 database_url = os.getenv("DATABASE_URL")
-print(database_url)
 
 # Create engine
 engine = create_engine(database_url)
