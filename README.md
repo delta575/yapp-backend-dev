@@ -32,9 +32,8 @@ This project assumes the following requirements are met.
 - ### Clone this repo
 
 ```bash
-
-$ git clone https://github.com/delta575/yapp-backend-dev.git
-$ cd yapp-backend-dev
+$ git clone https://github.com/delta575/yapp-backend-dev.git  # Clone this repo
+$ cd yapp-backend-dev  # Change directory to project root folder
 ```
 
 - ### Set environment variables
@@ -42,8 +41,8 @@ $ cd yapp-backend-dev
 Edit file following this specifications:
 
 ```bash
-$ cp .env.example .env
-$ nano .env
+$ cp .env.example .env  # Copy example
+$ nano .env  # Edit file
 ```
 
 | Variable     | Description                                                                                                                       |
@@ -56,10 +55,12 @@ $ nano .env
 - ### Setup virtual environment and install requirements:
 
 Install development requirements, poetry is used as the preferred package manager.
+Follow the [install instructions](https://python-poetry.org/docs/#installation) for your enviroment.
+
+Then install the project local dependencies:
 
 ```bash
-$ python -m pip install poetry
-$ poetry install --dev
+$ poetry install  # Create virtual env and install dependencies
 ```
 
 - ### Deploy MySQL DataBase
@@ -68,7 +69,7 @@ If you already have MySQL deployed you can skip this step, just make sure to poi
 For easy deployment, a MySQL DataBase was containerized with a `docker-compose.yml` which also sets the needed environment variables for authentication.
 
 ```bash
-$ docker-compose up -d
+$ docker-compose up --build -d  # Deploys MySQL database as a docker container
 ```
 
 - ### Seed Data
@@ -76,7 +77,8 @@ $ docker-compose up -d
 Run the script `seed.py` which will create the Movie table from it's model and populate the DataBase with `data.csv` content.
 
 ```bash
-$ python yapp_backend seed.py
+$ poetry shell  # activate virtual environment
+$ python yapp_backend/seed.py  # run seed script
 ```
 
 - ### Run Unit Tests
@@ -85,7 +87,7 @@ Tests are defined in the `tests` folder in this project. Use [pytest](https://do
 
 ```bash
 poetry shell  # activate virtual environment
-python -m pytests -v  # run unit tests
+python -m pytest -v  # run unit tests
 ```
 
 - ### Deploy SAM Local Server

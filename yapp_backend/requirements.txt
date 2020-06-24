@@ -1,3 +1,4 @@
-sqlalchemy
+python-dotenv
 mysql-connector-python
+sqlalchemy
 sqlalchemy-serializer

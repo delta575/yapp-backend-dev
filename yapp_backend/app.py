@@ -41,7 +41,7 @@ def movie_list_handler(event, context, session):
     Returns:
     JSON with list of all movies
     """
-    movies = session.query(Movie).order_by(Movie.title).limit(15)
+    movies = session.query(Movie).order_by(Movie.title).all()
     return [movie.to_dict() for movie in movies]
 
 
@@ -55,7 +55,7 @@ def movie_get_handler(event, context, session):
 
     movie = session.query(Movie).get(movie_id)
 
-    return movie.to_dict()
+    return movie.to_dict() if movie else None
 
 
 @handler_decorator
