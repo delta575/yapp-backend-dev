@@ -25,7 +25,7 @@ This project assumes the following requirements are met.
 
 - [Python3.7+ ](https://www.python.org/downloads/) - Lambda functions use Python runtime environment.
 - [Docker and docker-compose](https://docs.docker.com/engine/install/) - Needed for AWS SAM CLI and MySQL DataBase.
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) - Our serverless application framework.
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) - AWS Serverless Application Model framework.
 
 ## Deployment
 
@@ -51,7 +51,7 @@ $ nano .env
 | PYTHONPATH   | Changes python root path for SAM compatibility, must be changed to point at "yapp_backend" folder                                 |
 | DATABASE_URL | MySQL URL for connection, must follow the following structure: "mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db_name}" |
 
-Finally, set the same DATABASE_URL environment variable for SAM Global configs located on `template.yaml` file.
+**Important:**, set the same DATABASE_URL environment variable for SAM Global configs located on `template.yaml` file.
 
 - ### Setup virtual environment and install requirements:
 
@@ -81,7 +81,7 @@ $ python yapp_backend seed.py
 
 - ### Run Unit Tests
 
-Tests are defined in the `tests` folder in this project. Use PIP to install the [pytest](https://docs.pytest.org/en/latest/) and run unit tests.
+Tests are defined in the `tests` folder in this project. Use [pytest](https://docs.pytest.org/en/latest/) to run unit tests.
 
 ```bash
 poetry shell  # activate virtual environment
@@ -94,7 +94,8 @@ python -m pytests -v  # run unit tests
 sam build --use-container && sam local start-api
 ```
 
-You can test the API visiting a GET method on your browser, [Postman](https://www.postman.com/) is recommended for fully featured testing.
+You can test the API visiting a GET method on your browser, by default SAM runs at [http://localhost:3000/](http://localhost:3000/).
+[Postman](https://www.postman.com/) is recommended for fully featured testing.
 
 ## SAM API:
 
@@ -106,4 +107,4 @@ Simple CRUD methods:
 | GET    | /movie/{id} | Returns movie matching id                                          | URL Params: movie id                   |
 | POST   | /movie      | Creates new movie from JSON data on body of request                | Body: JSON with new movie data         |
 | PUT    | /movie      | Updates movie title by id provided in JSON data on body of request | Body: JSON with movie id and new title |
-| DELETE | /movie      | Removes Movie matching id of QueryString from database             | QueryString: URL encoded movie id      |
+| DELETE | /movie      | Removes Movie matching id of QueryString from DataBase             | QueryString: URL encoded movie id      |
